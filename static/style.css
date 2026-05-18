@@ -659,11 +659,30 @@ a {
   font-size: 0.9rem;
 }
 
+/* ── Hamburger ── */
+
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray);
+  padding: 0;
+  line-height: 0;
+  transition: color 0.15s;
+  align-items: center;
+}
+
+.nav-hamburger:hover {
+  color: var(--black);
+}
+
 /* ── Responsive ── */
 
 @media (max-width: 640px) {
   .site-header {
     padding: 0 1.25rem;
+    position: relative;
   }
 
   .site-main {
@@ -676,5 +695,86 @@ a {
 
   .post-title {
     font-size: 1.6rem;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--bg);
+    border-bottom: 1px solid var(--light-gray);
+    z-index: 200;
+    padding: 0.5rem 0;
+    gap: 0;
+  }
+
+  .site-nav.is-open {
+    display: flex;
+  }
+
+  .site-nav > a {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.5rem;
+    color: var(--gray);
+  }
+
+  .site-nav > a:hover {
+    color: var(--black);
+    background: var(--dropdown-hover-bg);
+  }
+
+  .nav-dropdown {
+    flex-direction: column;
+    align-self: unset;
+  }
+
+  .nav-dropdown-toggle {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.5rem;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .nav-dropdown:hover .nav-dropdown-toggle {
+    color: var(--gray);
+  }
+
+  .nav-dropdown.is-open .nav-dropdown-toggle {
+    color: var(--black);
+  }
+
+  .nav-dropdown:hover .nav-caret {
+    transform: none;
+  }
+
+  .nav-dropdown.is-open .nav-caret {
+    transform: rotate(-180deg);
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    border: none;
+    border-top: 1px solid var(--light-gray);
+    min-width: unset;
+    max-height: unset;
+    overflow-y: visible;
+    background: var(--dropdown-hover-bg);
+    display: none;
+  }
+
+  .nav-dropdown.is-open .nav-dropdown-menu {
+    display: flex;
+  }
+
+  .nav-dropdown-menu a {
+    padding: 0.6rem 2.25rem;
+    font-size: 0.85rem;
   }
 }

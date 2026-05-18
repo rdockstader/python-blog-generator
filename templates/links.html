@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Links — {{ site_name }}{% endblock %}
+{% block meta_description %}Curated links on {{ site_name }}{% endblock %}
+
+{% block content %}
+<p class="page-title">Links</p>
+
+{% if links %}
+<ul class="link-list">
+  {% for link in links %}
+  <li class="link-list-item">
+    <div class="link-item-main">
+      <a href="{{ root_path }}links/go/?link={{ link.name }}" class="link-item-title">{{ link.name }}</a>
+      {% if link.description %}
+      <p class="link-item-description">{{ link.description }}</p>
+      {% endif %}
+    </div>
+    <a href="{{ root_path }}links/go/?link={{ link.name }}" class="link-item-visit">Visit →</a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<div class="empty-state">No links yet.</div>
+{% endif %}
+{% endblock %}

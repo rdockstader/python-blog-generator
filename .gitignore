@@ -1,0 +1,11 @@
+.DS_Store
+dist/
+.venv/
+.env
+
+# Uncomment the lines below if you want to track your own content in this repo.
+# By default, posts, images, and data are excluded so this repo stays a clean
+# template — add your content in a separate private repo.
+posts/
+images/
+data/

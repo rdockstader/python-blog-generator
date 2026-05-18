@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} — {{ site_name }}{% endblock %}
+{% block meta_description %}{{ post.description or post.title }}{% endblock %}
+
+{% block content %}
+<a href="{{ root_path }}" class="back-link">All Posts</a>
+
+<article>
+  <header class="post-header">
+    <div class="post-header-meta">
+      <span class="post-date">{{ post.date.strftime("%B %-d, %Y") }}</span>
+      {% if post.type %}
+      <a href="{{ root_path }}types/{{ post.type | slugify }}/" class="type-tag">{{ post.type }}</a>
+      {% endif %}
+      {% if post.categories %}
+      <div class="post-categories">
+        {% for cat in post.categories %}
+        <a href="{{ root_path }}categories/{{ cat | slugify }}/" class="category-tag">{{ cat }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <h1 class="post-title">{{ post.title }}</h1>
+    {% if post.description %}
+    <p class="post-description">{{ post.description }}</p>
+    {% endif %}
+    {% if post.author %}
+    <p class="post-byline">by {{ post.author }}</p>
+    {% endif %}
+  </header>
+
+  <hr class="post-divider">
+
+  <div class="post-content">
+    {{ post.content }}
+  </div>
+</article>
+{% endblock %}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ site_name }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ site_description }}{% endblock %}">
+  <link rel="icon" type="image/svg+xml" href="{{ root_path }}images/favicon.svg">
+  <link rel="stylesheet" href="{{ root_path }}static/style.css">
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="{{ root_path }}" class="site-logo">{{ site_name }}</a>
+      <nav class="site-nav">
+        <a href="{{ root_path }}">Posts</a>
+        {% if has_links %}
+        <a href="{{ root_path }}links/">Links</a>
+        {% endif %}
+        {% if all_types %}
+        <div class="nav-dropdown">
+          <span class="nav-dropdown-toggle">Types <span class="nav-caret">▾</span></span>
+          <div class="nav-dropdown-menu">
+            {% for t in all_types %}
+            <a href="{{ root_path }}types/{{ t.slug }}/">{{ t.name }}</a>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+        {% if all_categories %}
+        <div class="nav-dropdown">
+          <span class="nav-dropdown-toggle">Categories <span class="nav-caret">▾</span></span>
+          <div class="nav-dropdown-menu">
+            {% for cat in all_categories %}
+            <a href="{{ root_path }}categories/{{ cat.slug }}/">{{ cat.name }}</a>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg id="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p>© {{ current_year }} {{ site_name }}</p>
+      <p>{{ post_count }} post{% if post_count != 1 %}s{% endif %}</p>
+    </div>
+  </footer>
+
+  <script src="{{ root_path }}static/script.js"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Redirecting… — {{ site_name }}{% endblock %}
+
+{% block content %}
+<p class="redirect-message">Taking you there…</p>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  (function () {
+    var links = {{ links_map_json }};
+    var params = new URLSearchParams(window.location.search);
+    var name = params.get("link");
+    if (name && links[name]) {
+      window.location.replace(links[name]);
+    } else {
+      window.location.replace("{{ root_path }}links/");
+    }
+  })();
+</script>
+{% endblock %}
